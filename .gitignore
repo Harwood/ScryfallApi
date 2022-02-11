@@ -18,6 +18,14 @@ xcuserdata
 !default.perspectivev3
 !default.xcworkspace
 
+# Swift Package Manager
+Packages/
+Package.pins
+Package.resolved
+*.xcodeproj
+.swiftpm
+.build/
+
 profile
 *.hmap
 *.ipa
