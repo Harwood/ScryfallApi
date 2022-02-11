@@ -1,1 +1,1 @@
-# Scryfall
+![Banner](/assets/banner.png)
