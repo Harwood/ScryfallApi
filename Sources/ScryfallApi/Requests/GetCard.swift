@@ -34,7 +34,7 @@ public extension ScryfallApi {
                 case let .scryfall(id):
                     return "/cards/\(id.uuidString)"
                 case let .arena(id):
-                    return "/cards/arena\(id)"
+                    return "/cards/arena/\(id)"
                 case let .cardmarket(id):
                     return "/cards/cardmarket/\(id)"
                 case let .mtgo(id):

@@ -48,37 +48,37 @@ public extension ScryfallApi {
         public let color_identity: [String]
         /// The colors in this card’s color indicator, if any. A nil value for this field indicates the card does not have one. Complete list at https://scryfall.com/docs/api/colors
         public let color_indicator: [String]?
-        /// This card’s colors, if the overall card has colors defined by the rules. Otherwise the colors will be on the `card_faces`. Complete list at https://scryfall.com/docs/api/colors
+        /// This card’s colors, if the overall card has colors defined by the rules. Otherwise the colors will be on the card_faces. Complete list at https://scryfall.com/docs/api/colors
         public let colors: [String]?
         /// This card’s overall rank/popularity on EDHREC. Not all cards are ranked.
         public let edhrec_rank: Int?
-        /// This card’s hand modifier, if it is Vanguard card. This value will contain a delta, such as '-1'.
+        /// This card’s hand modifier, if it is Vanguard card. This value will contain a delta, such as -1.
         public let hand_modifier: String?
-        /// Keywords that this card uses, such as 'Flying' and 'Cumulative upkeep'.
+        /// Keywords that this card uses, such as Flying and Cumulative upkeep.
         public let keywords: [String]
         /// A code for this card’s layout. Complete list at https://scryfall.com/docs/api/layouts
         public let layout: String
-        /// An object describing the legality of this card across formats. Possible legalities are 'legal', 'not_legal', 'restricted', and 'banned'.
+        /// An object describing the legality of this card across formats. Possible legalities are legal, not_legal, restricted, and banned.
         public let legalities: [String: String]
-        /// This card’s life modifier, if it is Vanguard card. This value will contain a delta, such as '+2'.
+        /// This card’s life modifier, if it is Vanguard card. This value will contain a delta, such as +2.
         public let life_modifier: String?
-        /// This card's loyalty, if any. Note that some cards have loyalties that are not numeric, such as 'X'.
+        /// This card's loyalty, if any. Note that some cards have loyalties that are not numeric, such as X.
         public let loyalty: String?
-        /// The mana cost for this card. This value will be any empty string "" if the cost is absent. Remember that per the game rules, a missing mana cost and a mana cost of '{0}' are different values. Multi-faced cards will report this value in `card_faces`.
+        /// The mana cost for this card. This value will be any empty string "" if the cost is absent. Remember that per the game rules, a missing mana cost and a mana cost of {0} are different values. Multi-faced cards will report this value in card_faces.
         public let mana_cost: String?
-        /// The name of this card. If this card has multiple faces, this field will contain both names separated by '//'.
+        /// The name of this card. If this card has multiple faces, this field will contain both names separated by //.
         public let name: String
         /// The Oracle text for this card, if any.
         public let oracle_text: String?
         /// True if this card is oversized.
         public let oversized: Bool
-        /// This card’s power, if any. Note that some cards have powers that are not numeric, such as '*'.
+        /// This card’s power, if any. Note that some cards have powers that are not numeric, such as *.
         public let power: String?
         /// Colors of mana that this card could produce. Complese list at https://scryfall.com/docs/api/colors
         public let produced_mana: [String]?
         /// True if this card is on the Reserved List.
         public let reserved: Bool
-        /// This card’s toughness, if any. Note that some cards have toughnesses that are not numeric, such as '*'.
+        /// This card’s toughness, if any. Note that some cards have toughnesses that are not numeric, such as *.
         public let toughness: String?
         /// The type line of this card.
         public let type_line: String
@@ -86,17 +86,17 @@ public extension ScryfallApi {
         public let artist: String?
         /// Whether this card is found in boosters.
         public let booster: Bool
-        /// This card’s border color: 'black', 'white', 'borderless', 'silver', or 'gold'.
+        /// This card’s border color: black, white, borderless, silver, or gold.
         public let border_color: String
         /// The Scryfall ID for the card back design present on this card.
         public let card_back_id: UUID
-        /// This card’s collector number. Note that collector numbers can contain non-numeric characters, such as letters or '★'.
+        /// This card’s collector number. Note that collector numbers can contain non-numeric characters, such as letters or ★.
         public let collector_number: String
         /// True if you should consider avoiding use of this print downstream.
         public let content_warning: Bool?
         /// True if this card was only released in a video game.
         public let digital: Bool
-        /// An array of computer-readable flags that indicate if this card can come in 'foil', 'nonfoil', 'etched', or 'glossy' finishes.
+        /// An array of computer-readable flags that indicate if this card can come in foil, nonfoil, etched, or glossy finishes.
         public let finishes: [String]
         /// The just-for-fun name printed on the card (such as for Godzilla series cards).
         public let flavor_name: String?
@@ -108,13 +108,13 @@ public extension ScryfallApi {
         public let frame: String
         /// True if this card’s artwork is larger than normal.
         public let full_art: Bool
-        /// A list of games that this card print is available in, 'paper', 'arena', and/or 'mtgo'.
+        /// A list of games that this card print is available in, paper, arena, and/or mtgo.
         public let games: [String]
         /// True if this card’s imagery is high resolution.
         public let highres_image: Bool
         /// A unique identifier for the card artwork that remains consistent across reprints. Newly spoiled cards may not have this field yet.
         public let illustration_id: UUID?
-        /// A computer-readable indicator for the state of this card’s image, one of 'missing', 'placeholder', 'lowres', or 'highres_scan'.
+        /// A computer-readable indicator for the state of this card’s image, one of missing, placeholder, lowres, or highres_scan.
         public let image_status: String
         /// Available imagery for this card.
         public let image_uris: Images?
@@ -132,12 +132,12 @@ public extension ScryfallApi {
         public let promo_types: [String]?
         /// URIs to this card’s listing on major marketplaces.
         public let purchase_uris: [String: URL]
-        /// This card’s rarity. One of 'common', 'uncommon', 'rare', 'special', 'mythic', or 'bonus'.
+        /// This card’s rarity. One of common, uncommon, rare, special, mythic, or bonus.
         public let rarity: String
         /// URIs to this card’s listing on other Magic: The Gathering online resources.
         public let related_uris: [String: URL]
         /// The date this card was first released.
-        public let released_at: Date
+        public let released_at: String
         /// True if this card is a reprint.
         public let reprint: Bool
         /// A link to this card’s set on Scryfall’s website.
@@ -162,7 +162,7 @@ public extension ScryfallApi {
         public let variation: Bool
         /// The printing ID of the printing this card is a variation of.
         public let variation_of: UUID?
-        /// The security stamp on this card, if any. One of 'oval', 'triangle', 'acorn', or 'arena'.
+        /// The security stamp on this card, if any. One of oval, triangle, acorn, or arena.
         public let security_stamp: String?
         /// This card’s watermark, if any.
         public let watermark: String?
@@ -182,7 +182,7 @@ public extension ScryfallApi {
             public let flavor_text: String?
             /// A unique identifier for the card face artwork that remains consistent across reprints. Newly spoiled cards may not have this field yet.
             public let illustration_id: String?
-            /// URIs to imagery for this face, if this is a double-sided card. If this card is not double-sided, then the `image_uris` property will be part of the parent type instead.
+            /// URIs to imagery for this face, if this is a double-sided card. If this card is not double-sided, then the image_uris property will be part of the parent type instead.
             public let image_uris: Images?
             /// The layout of this card face, if the card is reversible.
             public let layout: String?
@@ -196,7 +196,7 @@ public extension ScryfallApi {
             public let oracle_id: String?
             /// The Oracle text for this face, if any.
             public let oracle_text: String?
-            /// This face’s power, if any. Note that some cards have a power that is not numeric, such as "*".
+            /// This face’s power, if any. Note that some cards have a power that is not numeric, such as *.
             public let power: String?
             /// The localized name printed on this face, if any.
             public let printed_name: String?
@@ -204,7 +204,7 @@ public extension ScryfallApi {
             public let printed_text: String?
             /// The localized type line printed on this face, if any.
             public let printed_type_line: String?
-            /// This face’s toughness, if any. Note that some cards have a toughness that is not numeric, such as "*".
+            /// This face’s toughness, if any. Note that some cards have a toughness that is not numeric, such as *.
             public let toughness: String?
             /// The type line of this particular face, if the card is reversible.
             public let type_line: String?
@@ -215,7 +215,7 @@ public extension ScryfallApi {
         public struct RelatedCard: Equatable, Codable {
             /// A unique ID for this card in Scryfall’s database.
             public let id: UUID
-            /// A field explaining what role this card plays in this relationship, one of 'token', 'meld_part', 'meld_result', or 'combo_piece'.
+            /// A field explaining what role this card plays in this relationship, one of token, meld_part, meld_result, or combo_piece.
             public let component: String
             /// The name of this particular related card.
             public let name: String
@@ -261,7 +261,7 @@ public extension ScryfallApi {
             /// A link to the preview for this card.
             public let source_uri: URL?
             /// The date this card was previewed.
-            public let previewed_at: Date?
+            public let previewed_at: String?
         }
     }
 }

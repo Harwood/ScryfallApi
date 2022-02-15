@@ -6,5 +6,10 @@
 //  Copyright © 2022 Gauntlet. All rights reserved.
 //
 
+import Foundation
+
 /// Public namespace for Scryfall requests & responses.
-public enum ScryfallApi {}
+public enum ScryfallApi {
+    static let scheme = "https"
+    static let host = "api.scryfall.com"
+}

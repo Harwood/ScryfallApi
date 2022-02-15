@@ -20,6 +20,7 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "ScryfallApiTests",
-            dependencies: ["ScryfallApi"]),
+            dependencies: ["ScryfallApi"],
+            resources: [.process("Resources")]),
     ]
 )

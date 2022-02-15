@@ -17,7 +17,7 @@ public extension ScryfallApi {
 
         /// Query for bulk data with the given ID.
         ///
-        /// - Important: Valid bulk data IDs can be retrieved from executing the `GetAllBulkData` request.
+        /// - Important: Valid bulk data IDs can be retrieved from executing the GetAllBulkData request.
         /// - Parameter id: The unique ID of the bulk data.
         public init(id: UUID) {
             self.path = "/bulk-data/\(id.uuidString)"
@@ -25,8 +25,8 @@ public extension ScryfallApi {
 
         /// Query for bulk data with the given type.
         ///
-        /// - Important: Valid bulk data types can be retrieved from executing the `GetAllBulkData` request.
-        /// - Parameter type: The type of bulk data to query.
+        /// - Important: Valid bulk data types can be retrieved from executing the GetAllBulkData request.
+        /// - Parameter type: The bulk data type to query.
         public init(type: String) {
             self.path = "/bulk-data/\(type)"
         }

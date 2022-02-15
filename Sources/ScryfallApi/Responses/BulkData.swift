@@ -23,7 +23,7 @@ public extension ScryfallApi {
         /// The URI that hosts this bulk file for fetching.
         public let download_uri: URL
         /// The time when this file was last updated.
-        public let timestamp: String
+        public let updated_at: String
         /// The size of this file in integer bytes.
         public let compressed_size: Int
         /// The MIME type of this file.

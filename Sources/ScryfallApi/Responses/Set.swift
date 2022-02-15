@@ -23,7 +23,7 @@ public extension ScryfallApi {
         /// A computer-readable classification for this set.
         public let set_type: String
         /// The date the set was released or the first card was printed in the set (in GMT-8 Pacific time).
-        public let released_at: Date?
+        public let released_at: String?
         /// The block code for this set, if any.
         public let block_code: String?
         /// The block or group name code for this set, if any.

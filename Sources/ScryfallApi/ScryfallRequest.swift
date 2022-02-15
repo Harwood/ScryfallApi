@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias ScryfallRequest = ScryfallApiRequest & ResponseAssociable
+public typealias ScryfallRequest = ScryfallApiRequest & ResponseAssociable & Equatable
 
 public protocol ScryfallApiRequest {
     var path: String { get }
@@ -16,24 +16,31 @@ public protocol ScryfallApiRequest {
     var httpMethod: HTTPMethod { get }
 }
 
-public enum HTTPMethod {
+public enum HTTPMethod: Equatable {
     case POST(httpBody: Data?, contentType: String)
     case GET
 }
 
-extension ScryfallApiRequest {
-    var url: URL? {
+extension ScryfallApiRequest where Self: ResponseAssociable & Equatable {
+    func makeURL() throws -> URL {
         var components = URLComponents()
-        components.scheme = "https"
-        components.host = "api.scryfall.com"
+        components.scheme = ScryfallApi.scheme
+        components.host = ScryfallApi.host
         components.path = path
-        components.queryItems = queryItems
-        return components.url
+
+        let queryItems = queryItems.filter { $0.value != nil }
+        if !queryItems.isEmpty {
+            components.queryItems = queryItems
+        }
+
+        guard let url = components.url else {
+            throw ScryfallError<Self>.invalidRequest(self)
+        }
+        return url
     }
 
-    var urlRequest: URLRequest? {
-        guard let url = url else { return nil }
-
+    func makeURLRequest() throws -> URLRequest {
+        let url = try makeURL()
         var request = URLRequest(url: url)
 
         switch httpMethod {

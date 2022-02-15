@@ -15,8 +15,8 @@ public extension ScryfallApi {
         public let queryItems: [URLQueryItem] = []
         public let httpMethod: HTTPMethod
 
-        public struct Input: Encodable {
-            public enum Identifier: Encodable {
+        public struct Input: Equatable, Encodable {
+            public enum Identifier: Equatable, Encodable {
                 /// Find a card with a its Scryfall `id`.
                 case scryfall(UUID)
                 /// Find a card with its `mtgo_id` or `mtgo_foil_id`.
@@ -71,8 +71,7 @@ public extension ScryfallApi {
             /// - Important: Each POST at '/cards/collection' must contain *at most* 75 identifiers.
             /// If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` requests and execute them using `Scryfall.execute<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]`.
             /// - Parameter identifiers: A list of card identifiers to submit.
-            public init?(identifiers: [Identifier]) {
-                guard identifiers.count <= 75 else { return nil }
+            public init(identifiers: [Identifier]) {
                 self.identifiers = identifiers
             }
         }

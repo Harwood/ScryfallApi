@@ -15,7 +15,7 @@ public extension ScryfallApi {
         public let queryItems: [URLQueryItem] = []
         public let httpMethod: HTTPMethod = .GET
 
-        public enum Input: String, Equatable {
+        public enum CatalogName: String, Equatable, CaseIterable {
             case cardNames = "card-names"
             case artistNames = "artist-names"
             case wordBank = "word-bank"
@@ -37,9 +37,9 @@ public extension ScryfallApi {
         /// Query for a single catalog in Scryfall’s database.
         ///
         /// - Important: Values are updated as soon as a new card is entered for spoiler seasons.
-        /// - Parameter input: Input representing the catalog to query for.
-        public init(input: Input) {
-            self.path = "/catalog/\(input.rawValue)"
+        /// - Parameter catalogName: The name of the catalog to query for.
+        public init(named catalogName: CatalogName) {
+            self.path = "/catalog/\(catalogName.rawValue)"
         }
     }
 }

@@ -26,7 +26,7 @@ public extension ScryfallApi {
                 case let .scryfall(id):
                     return "/sets/\(id.uuidString)"
                 case let .tcgplayer(id):
-                    return "/sets/\(id)"
+                    return "/sets/tcgplayer/\(id)"
                 }
             }
         }

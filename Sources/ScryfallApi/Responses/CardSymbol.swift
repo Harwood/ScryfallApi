@@ -29,7 +29,7 @@ public extension ScryfallApi {
         /// An array of colors that this symbol represents.
         public let colors: [String]
         /// An array of plaintext versions of this symbol that Gatherer uses on old cards to describe original printed text. For example: {W} has ["oW", "ooW"] as alternates.
-        public let gatherer_alternates: String?
+        public let gatherer_alternates: [String]?
         /// A URI to an SVG image of this symbol on Scryfall’s CDNs.
         public let svg_uri: URL?
     }

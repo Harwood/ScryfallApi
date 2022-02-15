@@ -19,11 +19,12 @@ public extension ScryfallApi {
         ///
         /// - Parameter candidate: The candidate string to autocomplete.
         /// - Parameter includeExtras: If true, extra cards (tokens, planes, vanguards, etc) will be included.
-        public init(candidate: String, includeExtras: Bool = false) {
-            self.queryItems = [
-                URLQueryItem(name: "q", value: candidate),
-                URLQueryItem(name: "include_extras", value: String(includeExtras))
-            ]
+        public init(candidate: String, includeExtras: Bool? = nil) {
+            var queryItems = [URLQueryItem(name: "q", value: candidate)]
+            if let includeExtras = includeExtras {
+                queryItems.append(URLQueryItem(name: "include_extras", value: String(includeExtras)))
+            }
+            self.queryItems = queryItems
         }
     }
 }

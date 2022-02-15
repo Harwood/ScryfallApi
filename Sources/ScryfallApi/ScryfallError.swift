@@ -6,19 +6,19 @@
 //  Copyright © 2022 Gauntlet. All rights reserved.
 //
 
-public enum ScryfallError<T: ScryfallRequest>: Error, CustomDebugStringConvertible {
-    case apiResponse(ErrorResponse)
+public enum ScryfallError<T: ScryfallRequest>: Error, Equatable, CustomDebugStringConvertible {
+    case errorResponse(T, ErrorResponse)
     case invalidRequest(T)
-    case invalidResponse
+    case unknownResponse(T)
 
     public var debugDescription: String {
         switch self {
-        case let .apiResponse(error):
-            return error.debugDescription
+        case let .errorResponse(request, error):
+            return "Scryfall request failed: \(request)\n\(error.debugDescription)"
         case let .invalidRequest(request):
             return "Could not construct URL. Please confirm your path & query items are formatted correctly.\n\(request)"
-        case .invalidResponse:
-            return "Could not decode response. An unsupported resource may have been requested. Please ping us @ https://discord.gg/BSBWBsvMGc"
+        case let .unknownResponse(request):
+            return "Could not decode response. Please confirm your ScryfallRequest.Response type matches the expected response type from the Scryfall API.\n\(request)"
         }
     }
 }
