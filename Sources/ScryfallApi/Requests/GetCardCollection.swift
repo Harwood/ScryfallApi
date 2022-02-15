@@ -69,7 +69,7 @@ public extension ScryfallApi {
             /// Multiple identifier schemas may be included in a single request. Each identifier will return up to one card.
             ///
             /// - Important: Each POST at '/cards/collection' must contain *at most* 75 identifiers.
-            /// If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` requests and execute them using `Scryfall.execute<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]`.
+            /// If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` requests and send them using `send<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]`.
             /// - Parameter identifiers: A list of card identifiers to submit.
             public init(identifiers: [Identifier]) {
                 self.identifiers = identifiers

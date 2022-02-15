@@ -59,7 +59,6 @@ public extension ScryfallApi {
         /// Query for a single card with the given set code and collector number.
         /// Optionally append a lang part to the URL to retrieve a non-English version of the card.
         ///
-        /// - Important: If a set code is not provided, the newest edition of the card will be returned.
         /// - Parameter setCode: A unique three to five-letter set code to limit the search to one set.
         /// - Parameter collectorNumber: The card's collector number.
         /// - Parameter language: The 2-3 character language code.
