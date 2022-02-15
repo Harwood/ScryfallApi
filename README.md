@@ -228,7 +228,7 @@ Query for a page of rulings for a specific card. [See full Scryfall documentatio
 - Parameter `identifier`: The card's unique identifier, from a list of valid lookup identifiers supported by the Scryfall API.
 ```swift
 let uuid = UUID(uuidString: "9129baf5-ffa9-4ffb-bcab-19d6a42dbfcc")
-let request = ScryfallApi.GetRulings(identifier:  .scryfall(uuid))
+let request = ScryfallApi.GetRulings(identifier: .scryfall(uuid))
 ```
 
 - Parameter `setCode`: The card's unique three to five-letter set code.
