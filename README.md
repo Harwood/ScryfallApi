@@ -186,8 +186,8 @@ Query for page of cards with specific identifiers. [See full Scryfall documentat
 
 Each submitted card identifier must be a JSON object with one or more valid identifier schema combinations. Multiple identifier schemas may be included in a single request. Each identifier will return up to one card.
 
-Each POST to "/cards/collection" must contain *at most* 75 identifiers. If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` requests and send them using `Scryfall.send<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]`.
-s
+Each POST to "/cards/collection" must contain *at most* 75 identifiers. If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` requests and send them using `send<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]`.
+
 - Parameter `input`: Contains a list of valid identifiers for a request.
 ```swift
 let identifiers: [ScryfallApi.GetCardCollection.Input.Identifier] = [
