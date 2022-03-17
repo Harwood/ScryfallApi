@@ -41,7 +41,7 @@ let request = ScryfallApi.AutocompleteCardName(candidate: "llanowar el")
 do {
     let response = try await scryfall.send(request: request)
 } catch {
-    print("Scryfall returned an error: \(error)")
+    logger.log("Scryfall returned an error: \(error)")
 }
 ```
 
@@ -57,7 +57,7 @@ let requests = [cardRequest1, cardRequest2, cardRequest3]
 do {
     let responses = try await scryfall.send(requests: requests)
 } catch {
-    print("Scryfall returned an error: \(error)")
+    loggerl.log("Scryfall returned an error: \(error)")
 }
 ```
 
@@ -295,7 +295,7 @@ let request = ScryfallApi.SearchCards(
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the swift compiler.
 
-Once you have your Swift package set up, adding Alamofire as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+Once you have your Swift package set up, adding ScryfallApi as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
 ```
 dependencies: [
