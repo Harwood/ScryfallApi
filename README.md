@@ -57,7 +57,7 @@ let requests = [cardRequest1, cardRequest2, cardRequest3]
 do {
     let responses = try await scryfall.send(requests: requests)
 } catch {
-    loggerl.log("Scryfall returned an error: \(error)")
+    logger.log("Scryfall returned an error: \(error)")
 }
 ```
 
