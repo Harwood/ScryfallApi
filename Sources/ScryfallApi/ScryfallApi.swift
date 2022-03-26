@@ -1,10 +1,8 @@
-//
-//  ScryfallApi.swift
-//  ScryfallApi
-//
-//  Created by Scott Campbell on 2/11/22.
-//  Copyright © 2022 Gauntlet. All rights reserved.
-//
+/**
+*  ScryfallApi
+*  Copyright © 2022 Gauntlet. All rights reserved.
+*  MIT license, see LICENSE file for details.
+*/
 
 import Foundation
 

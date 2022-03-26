@@ -1,10 +1,8 @@
-//
-//  Scryfall.swift
-//  ScryfallApi
-//
-//  Created by Scott Campbell on 2/11/22.
-//  Copyright © 2022 Gauntlet. All rights reserved.
-//
+/**
+*  ScryfallApi
+*  Copyright © 2022 Gauntlet. All rights reserved.
+*  MIT license, see LICENSE file for details.
+*/
 
 import Foundation
 
@@ -13,15 +11,15 @@ public protocol ScryfallSession {
     ///
     /// - Important: Scryfall asks that you insert 50 – 100 milliseconds of delay between each request that you send. Submitting excessive requests to the server may result in a HTTP 429 Too Many Requests status code.
     /// - Parameter request: A ScryfallRequest that provides request-specific information such as the URL and body data.
-    /// - Returns: An asynchronously-delivered ScryfallRequest.Response object for the completed ScryfallRequest.
-    func send<T: ScryfallRequest>(request: T) async throws -> T.Response
+    /// - Returns: An asynchronously-delivered ScryfallResult object containing the completed ScryfallRequest and its associated Response.
+    func send<T: ScryfallRequest>(request: T) async throws -> ScryfallResult<T>
 
     /// Send multiple ScryfallRequests to the Scryfall API. This function does not return until all requests have completed.
     ///
     /// - Important: Scryfall asks that you insert 50 – 100 milliseconds of delay between each request that you you send. Submitting excessive requests to the server may result in a HTTP 429 Too Many Requests status code.
     /// - Parameter requests: A list of ScryfallRequests that provide request-specific information such as the URL and body data.
-    /// - Returns: An asynchronously-delivered list of ScryfallRequest.Response objects for each completed ScryfallRequest.
-    func send<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]
+    /// - Returns: An asynchronously-delivered list of ScryfallResult objects for each completed ScryfallRequest.
+    func send<T: ScryfallRequest>(requests: [T]) async throws -> [ScryfallResult<T>]
 }
 
 protocol NetworkSession {
@@ -49,12 +47,12 @@ public final class Scryfall: ScryfallSession {
         self.networkSession = networkSession
     }
 
-    public func send<T: ScryfallRequest>(request: T) async throws -> T.Response {
+    public func send<T: ScryfallRequest>(request: T) async throws -> ScryfallResult<T> {
         let urlRequest = try request.makeURLRequest()
         let (data, _) = try await networkSession.data(for: urlRequest)
 
         if let response = try? JSONDecoder().decode(T.Response.self, from: data) {
-            return response
+            return ScryfallResult(request: request, response: response)
         } else if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
             // The Scryfall Api returned a search error object in the data response.
             // This is likely a 404 indicating that the query was ambiguous, no results found, etc.
@@ -64,18 +62,18 @@ public final class Scryfall: ScryfallSession {
         }
     }
 
-    public func send<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response] {
-        try await withThrowingTaskGroup(of: T.Response.self) { group in
+    public func send<T: ScryfallRequest>(requests: [T]) async throws -> [ScryfallResult<T>] {
+        try await withThrowingTaskGroup(of: ScryfallResult<T>.self) { group in
             for request in requests {
                 group.addTask {
                     return try await self.send(request: request)
                 }
             }
-            var responses: [T.Response] = []
-            for try await response in group {
-                responses.append(response)
+            var results: [ScryfallResult<T>] = []
+            for try await result in group {
+                results.append(result)
             }
-            return responses
+            return results
         }
     }
 }

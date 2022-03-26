@@ -1,10 +1,8 @@
-//
-//  ScryfallTests.swift
-//  ScryfallApiTests
-//
-//  Created by Scott Campbell on 2/11/22.
-//  Copyright © 2022 Gauntlet. All rights reserved.
-//
+/**
+*  ScryfallApi
+*  Copyright © 2022 Gauntlet. All rights reserved.
+*  MIT license, see LICENSE file for details.
+*/
 
 import XCTest
 @testable import ScryfallApi
@@ -15,9 +13,9 @@ final class ScryfallTests: XCTestCase {
         let networkSession = MockNetworkSession(data: mockResponseData)
         let scryfall = Scryfall(networkSession: networkSession)
         do {
-            let actualResponse = try await scryfall.send(request: MockScryfallRequest())
+            let result = try await scryfall.send(request: MockScryfallRequest())
             let expectedResponse = try JSONDecoder().decode(MockScryfallResponse.self, from: mockResponseData)
-            XCTAssertEqual(actualResponse, expectedResponse)
+            XCTAssertEqual(result.response, expectedResponse)
         } catch {
             XCTFail("Expected to return success response from Scryfall API, but threw an error")
         }
@@ -56,10 +54,10 @@ final class ScryfallTests: XCTestCase {
         let scryfall = Scryfall(networkSession: networkSession)
         let requests = Array(repeating: MockScryfallRequest(), count: 5)
         do {
-            let actualResponses = try await scryfall.send(requests: requests)
+            let results = try await scryfall.send(requests: requests)
             let expectedResponse = try JSONDecoder().decode(MockScryfallResponse.self, from: mockResponseData)
             let expectedResponses = Array(repeating: expectedResponse, count: requests.count)
-            XCTAssertEqual(actualResponses, expectedResponses)
+            XCTAssertEqual(results.map { $0.response }, expectedResponses)
         } catch {
             XCTFail("Expected to return success responses from Scryfall API, but threw an error")
         }
