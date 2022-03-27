@@ -19,8 +19,8 @@ final class GetCardCollectionTests: XCTestCase {
             .nameSetCode(name: "Maelstrom Wanderer", setCode: "pc2"),
             .collectorNumberSetCode(collectorNumber: "101", setCode: "pc2")
         ]
-        let request = ScryfallApi.GetCardCollection(input: .init(identifiers: identifiers))
-        let urlRequest = try request.makeURLRequest()
+        let operation = ScryfallApi.GetCardCollection(input: .init(identifiers: identifiers))
+        let urlRequest = try operation.makeURLRequest()
         let cardIdentifiersData = try ResourceLoader.data(for: .cardIdentifiers)
 
         XCTAssertURL(urlRequest.url, path: "/cards/collection", query: "")

@@ -7,7 +7,7 @@
 import Foundation
 
 public extension ScryfallApi {
-    struct GetCard: ScryfallRequest {
+    struct GetCard: ScryfallOperation {
         public typealias Response = Card
         public let path: String
         public let queryItems: [URLQueryItem]

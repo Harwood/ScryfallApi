@@ -7,11 +7,11 @@
 import XCTest
 @testable import ScryfallApi
 
-final class GetAllSetsTests: XCTestCase {
+final class GetAllBulkDataTests: XCTestCase {
     func test_urlRequest() throws {
-        let request = ScryfallApi.GetAllSets()
-        let urlRequest = try request.makeURLRequest()
-        XCTAssertURL(urlRequest.url, path: "/sets", query: "")
+        let operation = ScryfallApi.GetAllBulkData()
+        let urlRequest = try operation.makeURLRequest()
+        XCTAssertURL(urlRequest.url, path: "/bulk-data", query: "")
         XCTAssertEqual(urlRequest.httpMethod, "GET")
     }
 }

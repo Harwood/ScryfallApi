@@ -7,7 +7,7 @@
 import Foundation
 
 public extension ScryfallApi {
-    struct AutocompleteCardName: ScryfallRequest {
+    struct AutocompleteCardName: ScryfallOperation {
         public typealias Response = Catalog
         public let path = "/cards/autocomplete"
         public let queryItems: [URLQueryItem]

@@ -7,7 +7,7 @@
 import Foundation
 
 public extension ScryfallApi {
-    struct GetBulkData: ScryfallRequest {
+    struct GetBulkData: ScryfallOperation {
         public typealias Response = BulkData
         public let path: String
         public let queryItems: [URLQueryItem] = []

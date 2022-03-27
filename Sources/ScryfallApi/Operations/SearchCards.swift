@@ -19,7 +19,7 @@ public extension ScryfallApi {
         case cards, art, prints
     }
 
-    struct SearchCards: ScryfallRequest {
+    struct SearchCards: ScryfallOperation {
         public typealias Response = Page<Card>
         public let path = "/cards/search"
         public let queryItems: [URLQueryItem]

@@ -7,7 +7,7 @@
 import Foundation
 
 public extension ScryfallApi {
-    struct ParseManaCost: ScryfallRequest {
+    struct ParseManaCost: ScryfallOperation {
         public typealias Response = ManaCost
         public let path = "/symbology/parse-mana"
         public let queryItems: [URLQueryItem]

@@ -11,7 +11,7 @@ Please read [Scryfall's Rate Limits & Good Citizenship](https://scryfall.com/doc
 <!--ts-->
 * [Usage](/documentation/USAGE.md#table-of-contents)
     * [Sending requests](/documentation/USAGE.md#sending-requests)
-    * [Adding new requests](/documentation/USAGE.md#adding-new-requests)
+    * [Adding new operations](/documentation/USAGE.md#adding-new-operations)
     * [API reference](/documentation/USAGE.md#api-reference)
 * [Installation](#installation)
 * [Contact](#contact)

@@ -7,7 +7,7 @@
 import Foundation
 
 public extension ScryfallApi {
-    struct GetCardCollection: ScryfallRequest {
+    struct GetCardCollection: ScryfallOperation {
         public typealias Response = Page<Card>
         public let path = "/cards/collection"
         public let queryItems: [URLQueryItem] = []

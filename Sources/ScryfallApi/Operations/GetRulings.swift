@@ -7,7 +7,7 @@
 import Foundation
 
 public extension ScryfallApi {
-    struct GetRulings: ScryfallRequest {
+    struct GetRulings: ScryfallOperation {
         public typealias Response = Page<Ruling>
         public let path: String
         public let queryItems: [URLQueryItem] =  []

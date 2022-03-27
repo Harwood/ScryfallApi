@@ -12,7 +12,7 @@ struct MockScryfallResponse: Equatable, Codable {
     let data: String
 }
 
-struct MockScryfallRequest: ScryfallRequest {
+struct MockScryfallOperation: ScryfallOperation {
     typealias Response = MockScryfallResponse
     var path: String = ""
     var queryItems: [URLQueryItem] = []

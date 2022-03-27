@@ -7,13 +7,13 @@
 import Foundation
 
 public extension ScryfallApi {
-    struct GetAllCardSymbols: ScryfallRequest {
+    struct GetAllBulkData: ScryfallOperation {
         public typealias Response = Page<BulkData>
-        public let path = "/symbology"
+        public let path = "/bulk-data"
         public let queryItems: [URLQueryItem] = []
         public let httpMethod: HTTPMethod = .GET
 
-        /// Query a page containing all card symbols on Scryfall.
+        /// Query a page containing all bulk data on Scryfall.
         public init() {}
     }
 }

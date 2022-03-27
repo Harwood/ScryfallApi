@@ -4,19 +4,19 @@
 *  MIT license, see LICENSE file for details.
 */
 
-public enum ScryfallError<T: ScryfallRequest>: Error, Equatable, CustomDebugStringConvertible {
+public enum ScryfallError<T: ScryfallOperation>: Error, Equatable, CustomDebugStringConvertible {
     case errorResponse(T, ErrorResponse)
-    case invalidRequest(T)
+    case invalidOperation(T)
     case unknownResponse(T)
 
     public var debugDescription: String {
         switch self {
-        case let .errorResponse(request, error):
-            return "Scryfall request failed: \(request)\n\(error.debugDescription)"
-        case let .invalidRequest(request):
-            return "Could not construct URL. Please confirm your path & query items are formatted correctly.\n\(request)"
-        case let .unknownResponse(request):
-            return "Could not decode response. Please confirm your ScryfallRequest.Response type matches the expected response type from the Scryfall API.\n\(request)"
+        case let .errorResponse(operation, error):
+            return "Scryfall request failed: \(operation)\n\(error.debugDescription)"
+        case let .invalidOperation(operation):
+            return "Could not construct URL. Please confirm your path & query items are formatted correctly.\n\(operation)"
+        case let .unknownResponse(operation):
+            return "Could not decode response. Please confirm your ScryfallOperation.Response type matches the expected response type from the Scryfall API.\n\(operation)"
         }
     }
 }

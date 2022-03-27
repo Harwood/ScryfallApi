@@ -9,8 +9,8 @@ import XCTest
 
 final class GetAllCardSymbolsTests: XCTestCase {
     func test_urlRequest() throws {
-        let request = ScryfallApi.GetAllCardSymbols()
-        let urlRequest = try request.makeURLRequest()
+        let operation = ScryfallApi.GetAllCardSymbols()
+        let urlRequest = try operation.makeURLRequest()
         XCTAssertURL(urlRequest.url, path: "/symbology", query: "")
         XCTAssertEqual(urlRequest.httpMethod, "GET")
     }

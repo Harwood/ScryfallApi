@@ -2,7 +2,7 @@
 
 <!--ts-->
 * [Sending requests](#sending-requests)
-* [Adding new requests](#adding-new-requests)
+* [Adding new operations](#adding-new-operations)
 * [API reference](#api-reference)
     * [AutocompleteCardName](#autocompletecardname)
     * [GetAllBulkData](#getallbulkdata)
@@ -25,7 +25,7 @@
 
 ```swift
 let scryfall = Scryfall()
-let request = ScryfallApi.AutocompleteCardName(candidate: "llanowar el")
+let request = ScryfallRequest(operation: ScryfallApi.AutocompleteCardName(candidate: "llanowar el"))
 
 do {
     let response = try await scryfall.send(request: request)
@@ -38,9 +38,9 @@ do {
 
 ```swift
 let scryfall = Scryfall()
-let cardRequest1 = ScryfallApi.GetCard(exactName: "Maelstrom Wanderer")
-let cardRequest2 = ScryfallApi.GetCard(exactName: "Llanowar Elves")
-let cardRequest3 = ScryfallApi.GetCard(exactName: "Seton, Krosan Protector")
+let cardRequest1 = ScryfallRequest(operation: ScryfallApi.GetCard(exactName: "Maelstrom Wanderer"))
+let cardRequest2 = ScryfallRequest(operation: ScryfallApi.GetCard(exactName: "Llanowar Elves"))
+let cardRequest3 = ScryfallRequest(operation: ScryfallApi.GetCard(exactName: "Seton, Krosan Protector"))
 let requests = [cardRequest1, cardRequest2, cardRequest3]
 
 do {
@@ -50,21 +50,21 @@ do {
 }
 ```
 
-# Adding new requests
+# Adding new operations
 
-ScryfallApi provides pre-built requests for all Scryfall endpoints out-of-the-box. 
+ScryfallApi provides pre-built operations for all Scryfall endpoints out-of-the-box. 
 
-However, adding a new request is simple. Your request object/type just needs to implement [`ScryfallRequest`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/ScryfallRequest.swift). Note that the ScryfallApi adds all request and response types to the public `ScryfallApi` namespace - this is not required.
+However, adding a new operation is simple. Your operation object/type just needs to implement [`ScryfallOperation`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/ScryfallOperation.swift). Note that the ScryfallApi adds all operation and response types to the public `ScryfallApi` namespace - this is not required.
 
-### `ScryfallRequest`
+### [`ScryfallOperation`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/ScryfallOperation.swift)
 - `path`: The path component for the underlying `URLRequest`.
 - `urlQueryItems`: Build the query component for the underlying `URLRequest`.
 - `httpMethod`: Populate the http method, headers, and body for the underlying `URLRequest`.
-- `Response`: Every request must specify a `Codable` response that it expects to receive from the Scryfall API.
+- `Response`: Every operation must specify a `Codable` response that it expects to receive from the Scryfall API.
 
 ```swift
 extension ScryfallApi {
-    struct ExampleRequest: ScryfallRequest {
+    struct ExampleOperation: ScryfallOperation {
         typealias Response = ExampleResponse
         let path: String = "/some/path"
         let urlQueryItems: [URLQueryItem] = []

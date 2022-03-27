@@ -4,56 +4,18 @@
 *  MIT license, see LICENSE file for details.
 */
 
-import Foundation
-
-public typealias ScryfallRequest = ScryfallApiRequest & ResponseAssociable & Equatable
-
-public protocol ScryfallApiRequest {
-    var path: String { get }
-    var queryItems: [URLQueryItem] { get }
-    var httpMethod: HTTPMethod { get }
-}
-
-public enum HTTPMethod: Equatable {
-    case POST(httpBody: Data?, contentType: String)
-    case GET
-}
-
-extension ScryfallApiRequest where Self: ResponseAssociable & Equatable {
-    func makeURL() throws -> URL {
-        var components = URLComponents()
-        components.scheme = ScryfallApi.scheme
-        components.host = ScryfallApi.host
-        components.path = path
-
-        let queryItems = queryItems.filter { $0.value != nil }
-        if !queryItems.isEmpty {
-            components.queryItems = queryItems
-        }
-
-        guard let url = components.url else {
-            throw ScryfallError<Self>.invalidRequest(self)
-        }
-        return url
+public struct ScryfallRequest<T: ScryfallOperation>: Equatable {
+    /// Descriptive information about the request that can be used for discovery and identification.
+    public let metadata: String?
+    /// A ScryfallOperation that provides request-specific information such as the URL and body data.
+    public let operation: T
+    
+    /// Provides request-specific information such as the operation to execute, and descriptive metadata.
+    ///
+    /// - Parameter metadata: Descriptive information about the request that can be used for discovery and identification.
+    /// - Parameter operation: A ScryfallOperation that provides request-specific information such as the URL and body data.
+    public init(metadata: String? = nil, operation: T) {
+        self.metadata = metadata
+        self.operation = operation
     }
-
-    func makeURLRequest() throws -> URLRequest {
-        let url = try makeURL()
-        var request = URLRequest(url: url)
-
-        switch httpMethod {
-        case let .POST(httpBody, contentType):
-            request.httpMethod = "POST"
-            request.httpBody = httpBody
-            request.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        case .GET:
-            request.httpMethod = "GET"
-        }
-
-        return request
-    }
-}
-
-public protocol ResponseAssociable {
-    associatedtype Response: Codable
 }
