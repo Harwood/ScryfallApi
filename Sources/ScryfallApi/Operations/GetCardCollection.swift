@@ -64,10 +64,10 @@ public extension ScryfallApi {
             let identifiers: [Identifier]
 
             /// Each submitted card identifier must be a JSON object with one or more valid identifier schema combinations.
-            /// Multiple identifier schemas may be included in a single request. Each identifier will return up to one card.
+            /// Multiple identifier schemas may be included in a single operation. Each identifier will return up to one card.
             ///
             /// - Important: Each POST at '/cards/collection' must contain *at most* 75 identifiers.
-            /// If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` requests and send them using `send<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]`.
+            /// If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` operations and send them using `send<T: ScryfallOperation>(requests: [ScryfallRequest<T>]) async throws -> [ScryfallResult<T>]`.
             /// - Parameter identifiers: A list of card identifiers to submit.
             public init(identifiers: [Identifier]) {
                 self.identifiers = identifiers
@@ -77,7 +77,7 @@ public extension ScryfallApi {
         /// Query for page of cards with specific identifiers.
         ///
         /// - Important: Identifiers that are not found will be returned in the `not_found` field.
-        /// - Parameter input: Contains a list of valid identifiers for a request.
+        /// - Parameter input: Contains a list of valid identifiers for an operation.
         public init(input: Input) {
             self.httpMethod = .POST(
                 httpBody: try? JSONEncoder().encode(input),

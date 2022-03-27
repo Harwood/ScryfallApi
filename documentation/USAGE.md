@@ -82,71 +82,71 @@ extension ScryfallApi {
 
 # API reference
 
-## [`AutocompleteCardName`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/AutocompleteCardName.swift)
+## [`AutocompleteCardName`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/AutocompleteCardName.swift)
 Query for a catalog of up to 20 full english card names that could be autocompletions of the candidate string. [See full Scryfall documentation](https://scryfall.com/docs/api/cards/autocomplete).
 
 - Parameter `candidate`: The candidate string to autocomplete.
 - Parameter `includeExtras`: If true, extra cards (tokens, planes, vanguards, etc) will be included.
 ```swift
-let request = ScryfallApi.AutocompleteCardName(
+let operation = ScryfallApi.AutocompleteCardName(
     candidate: "llanowar el", 
     includeExtras: true
 )
 ```
 
-## [`GetAllBulkData`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetAllBulkData.swift)
+## [`GetAllBulkData`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetAllBulkData.swift)
 
-Query for a page containing all bulk data on Scryfall. This request does not accept any additional parameters. [See full Scryfall documentation](https://scryfall.com/docs/api/bulk-data/all).
-
-```swift
-let request = ScryfallApi.GetAllBulkData()
-```
-
-## [`GetAllCardSymbols`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetAllCardSymbols.swift)
-
-Query for a page containing all card symbols on Scryfall. This request does not accept any additional parameters. [See full Scryfall documentation](https://scryfall.com/docs/api/card-symbols/all).
+Query for a page containing all bulk data on Scryfall. This operation does not accept any additional parameters. [See full Scryfall documentation](https://scryfall.com/docs/api/bulk-data/all).
 
 ```swift
-let request = ScryfallApi.GetAllCardSymbols()
+let operation = ScryfallApi.GetAllBulkData()
 ```
 
-## [`GetAllSets`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetAllSets.swift)
+## [`GetAllCardSymbols`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetAllCardSymbols.swift)
 
-Query for a page containing all sets on Scryfall. This request does not accept any additional parameters. [See full Scryfall documentation](https://scryfall.com/docs/api/sets/all).
+Query for a page containing all card symbols on Scryfall. This operation does not accept any additional parameters. [See full Scryfall documentation](https://scryfall.com/docs/api/card-symbols/all).
 
 ```swift
-let request = ScryfallApi.GetAllSets()
+let operation = ScryfallApi.GetAllCardSymbols()
 ```
 
-## [`GetBulkData`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetBulkData.swift)
+## [`GetAllSets`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetAllSets.swift)
+
+Query for a page containing all sets on Scryfall. This operation does not accept any additional parameters. [See full Scryfall documentation](https://scryfall.com/docs/api/sets/all).
+
+```swift
+let operation = ScryfallApi.GetAllSets()
+```
+
+## [`GetBulkData`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetBulkData.swift)
 
 Query for bulk data. [See full Scryfall documentation](https://scryfall.com/docs/api/bulk-data).
 
-- Parameter `id`: The unique ID of the bulk data. Valid bulk data IDs can be retrieved from executing the [GetAllBulkData](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetAllBulkData.swift) request.
+- Parameter `id`: The unique ID of the bulk data. Valid bulk data IDs can be retrieved from executing the [GetAllBulkData](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetAllBulkData.swift) operation.
 ```swift
-let request = ScryfallApi.GetBulkData(id: "922288cb-4bef-45e1-bb30-0c2bd3d3534f")
+let operation = ScryfallApi.GetBulkData(id: "922288cb-4bef-45e1-bb30-0c2bd3d3534f")
 ```
 
-- Parameter `type`: The bulk data type to query. Valid bulk data types can be retrieved from executing the [GetAllBulkData](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetAllBulkData.swift) request.
+- Parameter `type`: The bulk data type to query. Valid bulk data types can be retrieved from executing the [GetAllBulkData](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetAllBulkData.swift) operation.
 ```swift
-let request = ScryfallApi.GetBulkData(type: "all_cards")
+let operation = ScryfallApi.GetBulkData(type: "all_cards")
 ```
 
-## [`GetCard`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetCard.swift)
+## [`GetCard`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetCard.swift)
 
 Query for a single card. [See full Scryfall documentation](https://scryfall.com/docs/api/cards).
 
 - Parameter `identifier`: The card's unique identifier, from a list of valid lookup identifiers supported by the Scryfall API.
 ```swift
 let uuid = UUID(uuidString: "9129baf5-ffa9-4ffb-bcab-19d6a42dbfcc")
-let request = ScryfallApi.GetCard(identifier: .scryfall(uuid))
+let operation = ScryfallApi.GetCard(identifier: .scryfall(uuid))
 ```
 
 - Parameter `setCode`: A unique three to five-letter set code to limit the search to one set.
 - Parameter `collectorNumber`: The card's collector number.
 - Parameter `language`: An optional 2-3 character language code.
 ```swift
-let request = ScryfallApi.GetCard(
+let operation = ScryfallApi.GetCard(
     setCode: "pc2",
     collectorNumber: "101",
     language: "en"
@@ -156,7 +156,7 @@ let request = ScryfallApi.GetCard(
 - Parameter `exactName`: An exact card name to search for.
 - Parameter `setCode`: A unique three to five-letter set code to limit the search to one set. If a set code is not provided, the newest edition of the card will be returned.
 ```swift
-let request = ScryfallApi.GetCard(
+let operation = ScryfallApi.GetCard(
     exactName: "Maelstrom Wanderer",
     setCode: "pc2"
 )
@@ -165,21 +165,21 @@ let request = ScryfallApi.GetCard(
 - Parameter `fuzzyName`: A fuzzy card name to search for.
 - Parameter `setCode`: A unique three to five-letter set code to limit the search to one set. If a set code is not provided, the newest edition of the card will be returned.
 ```swift
-let request = ScryfallApi.GetCard(
+let operation = ScryfallApi.GetCard(
     fuzzyName: "MaElStr0m WaNderror",
     setCode: "pc2"
 )
 ```
 
-## [`GetCardCollection`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetCardCollection.swift)
+## [`GetCardCollection`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetCardCollection.swift)
 
 Query for page of cards with specific identifiers. [See full Scryfall documentation](https://scryfall.com/docs/api/cards/collection).
 
-Each submitted card identifier must be a JSON object with one or more valid identifier schema combinations. Multiple identifier schemas may be included in a single request. Each identifier will return up to one card.
+Each submitted card identifier must be a JSON object with one or more valid identifier schema combinations. Multiple identifier schemas may be included in a single operation. Each identifier will return up to one card.
 
-Each POST to "/cards/collection" must contain *at most* 75 identifiers. If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` requests and send them using `send<T: ScryfallRequest>(requests: [T]) async throws -> [T.Response]`.
+Each POST to "/cards/collection" must contain *at most* 75 identifiers. If you have `75 > n <= Int.max` identifiers, group them into `ceiling(n / 75)` operations and send them using `send<T: ScryfallOperation>(requests: [ScryfallRequest<T>]) async throws -> [ScryfallResult<T>]`.
 
-- Parameter `input`: Contains a list of valid identifiers for a request.
+- Parameter `input`: Contains a list of valid identifiers for an operation.
 ```swift
 let identifiers: [ScryfallApi.GetCardCollection.Input.Identifier] = [
     .scryfall(UUID(uuidString: "9129baf5-ffa9-4ffb-bcab-19d6a42dbfcc")!),
@@ -191,71 +191,71 @@ let identifiers: [ScryfallApi.GetCardCollection.Input.Identifier] = [
     .nameSetCode(name: "Maelstrom Wanderer", setCode: "pc2"),
     .collectorNumberSetCode(collectorNumber: "101", setCode: "pc2")
 ]
-let request = ScryfallApi.GetCardCollection(input: .init(identifiers: identifiers))
+let operation = ScryfallApi.GetCardCollection(input: .init(identifiers: identifiers))
 ```
 
-## [`GetCatalog`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetCatalog.swift)
+## [`GetCatalog`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetCatalog.swift)
 
 Query for a single catalog which contains an array of Magic datapoints (words, card values, etc). Values are updated as soon as a new card is entered for spoiler seasons. [See full Scryfall documentation](https://scryfall.com/docs/api/catalogs).
 
 - Parameter `catalogName`: The name of the catalog to query for.
 ```swift
-let request = ScryfallApi.GetCatalog(named: .cardNames)
+let operation = ScryfallApi.GetCatalog(named: .cardNames)
 ```
 
-## [`GetRandomCard`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetRandomCard.swift)
+## [`GetRandomCard`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetRandomCard.swift)
 
 Query for a single random card. The random card pool can be filtered. [See full Scryfall documentation](https://scryfall.com/docs/api/cards/random).
 
 - Parameter `filter`: An optional fulltext entry to filter the pool of random cards.
 ```swift
-let request = ScryfallApi.GetRandomCard(filter: "llanowar")
+let operation = ScryfallApi.GetRandomCard(filter: "llanowar")
 ```
 
-## [`GetRulings`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetRulings.swift)
+## [`GetRulings`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetRulings.swift)
 
 Query for a page of rulings for a specific card. [See full Scryfall documentation](https://scryfall.com/docs/api/rulings).
 
 - Parameter `identifier`: The card's unique identifier, from a list of valid lookup identifiers supported by the Scryfall API.
 ```swift
 let uuid = UUID(uuidString: "9129baf5-ffa9-4ffb-bcab-19d6a42dbfcc")
-let request = ScryfallApi.GetRulings(identifier: .scryfall(uuid))
+let operation = ScryfallApi.GetRulings(identifier: .scryfall(uuid))
 ```
 
 - Parameter `setCode`: The card's unique three to five-letter set code.
 - Parameter `collectorNumber`: The card's collector number.
 ```swift
-let request = ScryfallApi.GetRulings(
+let operation = ScryfallApi.GetRulings(
     setCode: "pc2",
     collectorNumber: "101"
 )
 ```
 
-## [`GetSet`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/GetSet.swift)
+## [`GetSet`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/GetSet.swift)
 
 Query for a single set. [See full Scryfall documentation](https://scryfall.com/docs/api/sets).
 
 - Parameter `identifier`: The set's unique identifier, from a list of valid lookup identifiers supported by the Scryfall API.
 ```swift
 let uuid = UUID(uuidString: "9129baf5-ffa9-4ffb-bcab-19d6a42dbfcc")
-let request = ScryfallApi.GetSet(identifier: .scryfall(uuid))
+let operation = ScryfallApi.GetSet(identifier: .scryfall(uuid))
 ```
 
 - Parameter `setCode`: The unique three to five-letter code for this set.
 ```swift
-let request = ScryfallApi.GetSet(setCode: "pc2")
+let operation = ScryfallApi.GetSet(setCode: "pc2")
 ```
 
-## [`ParseManaCost`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/ParseManaCost.swift)
+## [`ParseManaCost`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/ParseManaCost.swift)
 
 Parse the given mana cost and returns Scryfall’s interpretation. The server understands most community shorthand for mana costs. Symbols can also be out of order, lowercase, or have multiple colorless costs. [See full Scryfall documentation](https://scryfall.com/docs/api/card-symbols/parse-mana).
 
 - Parameter `manaCost`: The mana cost string to parse.
 ```swift
-let request = ScryfallApi.ParseManaCost(manaCost: "8{U}{R}")
+let operation = ScryfallApi.ParseManaCost(manaCost: "8{U}{R}")
 ```
 
-## [`SearchCards`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Requests/SearchCards.swift)
+## [`SearchCards`](https://github.com/GauntletApp/ScryfallApi/blob/main/Sources/ScryfallApi/Operations/SearchCards.swift)
 
 Query for a paginated list of cards based on the given search term. [See full Scryfall documentation](https://scryfall.com/docs/api/cards/search).
 
@@ -268,7 +268,7 @@ Query for a paginated list of cards based on the given search term. [See full Sc
 - Parameter `includeMultilingual`: If true, cards in every language supported by Scryfall will be included.
 - Parameter `includeVariations`: If true, rare care variants will be included.
 ```swift
-let request = ScryfallApi.SearchCards(
+let operation = ScryfallApi.SearchCards(
     searchTerm: "llanowar",
     orderedBy: .name,
     direction: .auto,
